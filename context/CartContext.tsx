@@ -1,17 +1,3 @@
-// Utility to sanitize cart item data (defense-in-depth)
-function sanitizeCartItem(item) {
-  return {
-    ...item,
-    id: typeof item.id === 'string' ? item.id.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.id,
-    name: typeof item.name === 'string' ? item.name.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.name,
-    category: typeof item.category === 'string' ? item.category.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.category,
-    subcategory: typeof item.subcategory === 'string' ? item.subcategory.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.subcategory,
-    image: typeof item.image === 'string' ? item.image.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.image,
-    // price and quantity are numbers, no need to sanitize
-    price: item.price,
-    quantity: item.quantity,
-  };
-}
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
@@ -25,6 +11,21 @@ export interface CartItem {
   price: number;
   image: string;
   quantity: number;
+}
+
+// Utility to sanitize cart item data (defense-in-depth)
+function sanitizeCartItem(item) {
+  return {
+    ...item,
+    id: typeof item.id === 'string' ? item.id.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.id,
+    name: typeof item.name === 'string' ? item.name.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.name,
+    category: typeof item.category === 'string' ? item.category.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.category,
+    subcategory: typeof item.subcategory === 'string' ? item.subcategory.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.subcategory,
+    image: typeof item.image === 'string' ? item.image.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.image,
+    // price and quantity are numbers, no need to sanitize
+    price: item.price,
+    quantity: item.quantity,
+  };
 }
 
 interface CartContextType {
