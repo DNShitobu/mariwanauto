@@ -14,7 +14,7 @@ export interface CartItem {
 }
 
 // Utility to sanitize cart item data (defense-in-depth)
-function sanitizeCartItem(item) {
+function sanitizeCartItem(item: CartItem): CartItem {
   return {
     ...item,
     id: typeof item.id === 'string' ? item.id.replace(/<.*?>/g, '').replace(/["'`;]/g, '') : item.id,
